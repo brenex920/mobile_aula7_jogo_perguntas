@@ -16,6 +16,7 @@ import androidx.navigation.NavHost
 import androidx.navigation.NavType
 import androidx.navigation.compose.rememberNavController
 import com.aulasandroid.jogorespostas.screen.inicialScreen
+import com.aulasandroid.jogorespostas.screen.telaPergunta1
 import com.aulasandroid.jogorespostas.ui.theme.JogoRespostasTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +26,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             JogoRespostasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    inicialScreen()
+                   // inicialScreen()
+                    telaPergunta1()
                 }
             }
         }

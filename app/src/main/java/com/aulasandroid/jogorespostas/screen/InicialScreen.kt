@@ -2,6 +2,7 @@ package com.aulasandroid.jogorespostas.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -37,22 +38,28 @@ fun inicialScreen(){
             .fillMaxHeight()
             .background(color = colorResource(R.color.cor_app)),
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(175.dp))
 
             Image(
                 painter = painterResource(R.drawable.quiz),
                 contentDescription = "imc logo",
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(180.dp)
                     .padding(vertical = 20.dp)
 
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(50.dp))
+            Text(text = "QUIZATRON 3000",
+                modifier = Modifier.height(50.dp),
+                fontSize = 35.sp)
+            Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {},
-                modifier = Modifier.height(20.dp)
-                    .width(40.dp),
-            ) { }
+                modifier = Modifier.height(40.dp)
+                    .width(200.dp),
+            ) {Text(
+                text = "COMECAR!",
+                    ) }
         }
     }
 }
