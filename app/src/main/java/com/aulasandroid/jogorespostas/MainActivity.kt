@@ -7,30 +7,47 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHost
-import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.aulasandroid.jogorespostas.screen.Resultado
 import com.aulasandroid.jogorespostas.screen.inicialScreen
 import com.aulasandroid.jogorespostas.screen.telaPergunta1
 import com.aulasandroid.jogorespostas.ui.theme.JogoRespostasTheme
 
+// CORREÇÃO 1: Removido o (navController = NavController) do cabeçalho
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             JogoRespostasTheme {
+
+                // CORREÇÃO 2: Você precisa criar o controlador aqui dentro do setContent
+                val navController = rememberNavController()
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   // inicialScreen()
-                    telaPergunta1()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = "login",
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable(route = "login") {
+                            inicialScreen(navController)
+                        }
+
+                        composable(route = "Menu") {
+                            telaPergunta1(navController)
+                        }
+                        composable (route = "Resultado") {
+                            Resultado(navController)
+                        }
+
+                    }
                 }
             }
         }
     }
 }
-

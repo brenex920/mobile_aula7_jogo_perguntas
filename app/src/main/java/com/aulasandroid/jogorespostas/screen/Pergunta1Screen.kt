@@ -3,18 +3,13 @@ package com.aulasandroid.jogorespostas.screen
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,30 +29,61 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.aulasandroid.jogorespostas.R
 
-val opcoes = listOf("Vênus", "Júpiter", "Saturno", "marte")
-val certo = listOf("marte")
+
 var pontos = 0
 
-fun respostaCorreta(opcoes: List<String>, certo: List<String>) {
-    if (opcoes == certo) {
-        pontos++
-    } else {
-        pontos
-    }
-
-}
-
+//fun respostaCorreta() {
+//    if (opcoes == certo) {
+//        pontos++
+//    } else {
+//        pontos
+//    }
+//
+//}
 @Composable
-fun telaPergunta1() {
-    var corCard by remember { mutableStateOf(Color.White) }
-    var enunciado by remember {
-        mutableStateOf("Pergunta 1 de 3")
-    }
-    var pergunta by remember {
-        mutableStateOf("Qual o planeta conhecido como planeta vermelho?")
-    }
+fun telaPergunta1(navController: NavController) {
+    // 1. Criamos uma lista de perguntas para o sistema saber o que exibir a seguir
+
+//    pergunta -> enunciado
+//              -> alternativas
+//              -> alt.correta
+
+    class Pergunta (
+        val enunciado: String,
+        val alternativas: List<String>,
+        val alternativaCorreta: String,
+    )
+
+    val listaPerguntas = listOf(
+        Pergunta(
+            "Qual o planeta conhecido como planeta vermelho?",
+            listOf("Vênus", "Júpiter", "Saturno", "marte"),
+            "marte"
+        ),
+        Pergunta(
+            "Qual planeta é famoso pelos seus anéis?",
+            listOf("Mercúrio", "Vênus", "Saturno", "Netuno"),
+            "Mercúrio"
+        ),
+        Pergunta(
+            "Qual é o maior planeta do sistema solar?",
+            listOf("Terra", "Júpiter", "Saturno", "Urano"),
+            "Júpiter"
+        ),
+
+
+    )
+
+    var indiceAtual by remember { mutableStateOf(0) }
+
+    var qeustao by remember { mutableStateOf("Pergunta ${indiceAtual + 1} de 3") }
+    var enunciado by remember { mutableStateOf(listaPerguntas[indiceAtual].enunciado) }
+    var alternativasCorreta by remember { mutableStateOf(listaPerguntas[indiceAtual].alternativaCorreta) }
+    var alternativa by remember { mutableStateOf(listaPerguntas[indiceAtual].alternativas) }
 
     Column(
         modifier = Modifier
@@ -66,26 +92,24 @@ fun telaPergunta1() {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Image(
             painter = painterResource(R.drawable.quiz),
             contentDescription = "imc logo",
             modifier = Modifier
                 .size(100.dp)
                 .padding(vertical = 20.dp)
-
         )
 
         Spacer(modifier = Modifier.height(24.dp))
-
 
         Card(
             shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFF90D5A1)),
             border = BorderStroke(1.dp, Color.Black)
         ) {
+            // USANDO A VARIÁVEL ENUNCIADO
             Text(
-                text = "Pergunta 1 de 3",
+                text = qeustao,
                 modifier = Modifier.padding(horizontal = 40.dp, vertical = 12.dp),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Medium
@@ -93,7 +117,6 @@ fun telaPergunta1() {
         }
 
         Spacer(modifier = Modifier.height(24.dp))
-
 
         Card(
             modifier = Modifier
@@ -108,7 +131,12 @@ fun telaPergunta1() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Qual planeta é conhecido como planeta vermelho?",
+                    modifier = Modifier,
+                    text = "Pontos $pontos"
+                )
+                // USANDO A VARIÁVEL PERGUNTA
+                Text(
+                    text = enunciado,
                     fontSize = 22.sp,
                     textAlign = TextAlign.Start,
                     modifier = Modifier.fillMaxWidth()
@@ -116,14 +144,27 @@ fun telaPergunta1() {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                opcoes.map { opcao ->
 
+                alternativa.forEach { opcao ->
                     OutlinedButton(
                         onClick = {
-                            respostaCorreta(
-                                listOf("Vênus", "Júpiter", "Saturno", "marte"),
-                                listOf("marte")
-                            )
+
+                            if (indiceAtual < listaPerguntas.size - 1) {
+
+                                if (opcao == alternativasCorreta){
+                                    pontos++
+                                }
+                                indiceAtual++
+                                qeustao = "Pergunta ${indiceAtual + 1} de 3"
+                                enunciado = listaPerguntas[indiceAtual].enunciado
+                                alternativa = listaPerguntas[indiceAtual].alternativas
+                                alternativasCorreta = listaPerguntas[indiceAtual].alternativaCorreta
+
+
+
+                            } else{
+                                    navController.navigate("Resultado")
+                            }
                         },
                         modifier = Modifier
                             .fillMaxWidth()
