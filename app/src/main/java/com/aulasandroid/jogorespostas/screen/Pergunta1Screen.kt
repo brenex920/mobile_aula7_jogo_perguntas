@@ -34,6 +34,8 @@ import androidx.navigation.NavHostController
 import com.aulasandroid.jogorespostas.R
 
 
+
+
 var pontos = 0
 
 //fun respostaCorreta() {
@@ -52,12 +54,13 @@ fun telaPergunta1(navController: NavController) {
 //              -> alternativas
 //              -> alt.correta
 
+
+
     class Pergunta (
         val enunciado: String,
         val alternativas: List<String>,
         val alternativaCorreta: String,
     )
-
     val listaPerguntas = listOf(
         Pergunta(
             "Qual o planeta conhecido como planeta vermelho?",
@@ -71,19 +74,20 @@ fun telaPergunta1(navController: NavController) {
         ),
         Pergunta(
             "Qual é o maior planeta do sistema solar?",
-            listOf("Terra", "Júpiter", "Saturno", "Urano"),
-            "Júpiter"
+            listOf("Terra", "jupiter", "Saturno", "Urano"),
+            "jupiter"
         ),
 
 
     )
-
     var indiceAtual by remember { mutableStateOf(0) }
-
     var qeustao by remember { mutableStateOf("Pergunta ${indiceAtual + 1} de 3") }
     var enunciado by remember { mutableStateOf(listaPerguntas[indiceAtual].enunciado) }
     var alternativasCorreta by remember { mutableStateOf(listaPerguntas[indiceAtual].alternativaCorreta) }
     var alternativa by remember { mutableStateOf(listaPerguntas[indiceAtual].alternativas) }
+
+    var opcaoSelecionada by remember { mutableStateOf("") }
+    var mostrarCor by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -146,6 +150,8 @@ fun telaPergunta1(navController: NavController) {
 
 
                 alternativa.forEach { opcao ->
+
+
                     OutlinedButton(
                         onClick = {
 

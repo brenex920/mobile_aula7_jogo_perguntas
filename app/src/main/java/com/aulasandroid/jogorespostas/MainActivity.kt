@@ -16,7 +16,7 @@ import com.aulasandroid.jogorespostas.screen.inicialScreen
 import com.aulasandroid.jogorespostas.screen.telaPergunta1
 import com.aulasandroid.jogorespostas.ui.theme.JogoRespostasTheme
 
-// CORREÇÃO 1: Removido o (navController = NavController) do cabeçalho
+// CORREÇÃO 1: Removido o (navController = NavController) do cabeçalhodd
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
