@@ -63,6 +63,7 @@ fun Resultado(navController: NavController) {
                         text = "bom trabalho",
                         modifier = Modifier.padding(horizontal = 40.dp, vertical = 12.dp),
                         fontSize = 20.sp,
+                        color = Color.Black,
                         fontWeight = FontWeight.Medium
                     )
                 }
