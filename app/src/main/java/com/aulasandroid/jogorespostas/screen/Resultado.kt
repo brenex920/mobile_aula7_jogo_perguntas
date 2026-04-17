@@ -68,7 +68,7 @@ fun Resultado(navController: NavController) {
                 }
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "voce acertou $pontos de 3",
+                    text = "voce acertou $pontos de 8",
                     modifier = Modifier.height(50.dp),
                     fontSize = 30.sp
                 )

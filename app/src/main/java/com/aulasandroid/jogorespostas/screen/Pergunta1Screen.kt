@@ -63,25 +63,50 @@ fun telaPergunta1(navController: NavController) {
     )
     val listaPerguntas = listOf(
         Pergunta(
-            "Qual o planeta conhecido como planeta vermelho?",
-            listOf("Vênus", "Júpiter", "Saturno", "marte"),
-            "marte"
+            "qual o melhor tipo de menina?",
+            listOf("feminista", "cacheada", "loira", "morena"),
+            "cacheada"
         ),
         Pergunta(
-            "Qual planeta é famoso pelos seus anéis?",
-            listOf("Mercúrio", "Vênus", "Saturno", "Netuno"),
-            "Mercúrio"
+            "Qual numero é maior ?",
+            listOf("10", "7", "8", "100"),
+            "8"
         ),
         Pergunta(
-            "Qual é o maior planeta do sistema solar?",
-            listOf("Terra", "jupiter", "Saturno", "Urano"),
-            "jupiter"
+            "Qual o melhor professor ?",
+            listOf("newton", "leo", "jade", "tudo ruim"),
+            "newton"
+        ),
+        Pergunta(
+            "qual o melhor mascote (sem roubo 🙈)?",
+            listOf("batman", "arara", "pinguim", "dog dog"),
+            "dog dog"
+        ),
+        Pergunta(
+            "Quem arrasto o japones ?",
+            listOf("vitor", "breno", "igor", "todos"),
+            "igor"
+        ),
+        Pergunta(
+            "Quem rouba mais no truco ?",
+            listOf("vitor", "sales", "igor", "todos"),
+            "todos"
+        ),
+        Pergunta(
+            "como é o cabelo da menina mais gata da escola (segundo kauan😝) ?",
+            listOf("castanho", "cacheada", "loira", "todas"),
+            "castanho"
+        ),
+        Pergunta(
+        "Qual o melhor jogador?",
+        listOf("mr. bombinha", "breno", "bahia", "tudo fudido"),
+        "tudo fudido"
         ),
 
 
     )
     var indiceAtual by remember { mutableStateOf(0) }
-    var qeustao by remember { mutableStateOf("Pergunta ${indiceAtual + 1} de 3") }
+    var qeustao by remember { mutableStateOf("Pergunta ${indiceAtual + 1} de 8") }
     var enunciado by remember { mutableStateOf(listaPerguntas[indiceAtual].enunciado) }
     var alternativasCorreta by remember { mutableStateOf(listaPerguntas[indiceAtual].alternativaCorreta) }
     var alternativa by remember { mutableStateOf(listaPerguntas[indiceAtual].alternativas) }
@@ -161,7 +186,7 @@ fun telaPergunta1(navController: NavController) {
                                     pontos++
                                 }
                                 indiceAtual++
-                                qeustao = "Pergunta ${indiceAtual + 1} de 3"
+                                qeustao = "Pergunta ${indiceAtual + 1} de 8"
                                 enunciado = listaPerguntas[indiceAtual].enunciado
                                 alternativa = listaPerguntas[indiceAtual].alternativas
                                 alternativasCorreta = listaPerguntas[indiceAtual].alternativaCorreta
